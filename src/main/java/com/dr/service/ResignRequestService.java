@@ -50,6 +50,12 @@ public class ResignRequestService {
             if (resignRequest.getStatus().equals(Status.PENDING)){
                 resignRequest.setStatus(Status.APPROVED);
                 ResignRequest rr= resignRequestRepo.save(resignRequest);
+
+                // After approving resign request, updating the status to RESIGNED
+                Employee emp=resignRequest.getResign();
+                emp.setStatus(Status.RESIGNED);
+                employeeRepo.save(emp);
+
                 log.info("Resign request approved successfully");
                 return rr;
             }
