@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Get Single Employee</title>
+    <style>
+
+        /* styles.css */
+
+        body {
+            background-color: lightseagreen;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-top: 60px; /* Add padding to ensure content is not hidden under the fixed header */
+        }
+
+        h1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: lightseagreen;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 15px 0;
+            z-index: 1000; /* Ensure it is above other content */
+            font-size: 24px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            padding: 8px 12px;
+            margin: 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        button:nth-of-type(1) {
+            background-color: #4CAF50; /* Green */
+        }
+
+        button:nth-of-type(2) {
+            background-color: #f44336; /* Red */
+        }
+
+        button:nth-of-type(3) {
+            background-color: #ffc107; /* Yellow */
+        }
+
+            /*To make status column Bold*/
+                .sts{
+                    font-weight: bold;
+                }
+
+                 /*Alternate row colors*/
+                tr:nth-child(odd) {
+                    background-color: lightblue;
+                }
+                tr:nth-child(even) {
+                    background-color: lightcyan;
+                }
+                /* Hover effect */
+                tbody tr:hover {
+                    background-color: #ddd;
+                }
+
+                /* Filter Container */
+                .filter-container {
+                    position: fixed;
+                    top: 40px;
+                    right: 10px;
+                    z-index: 10;
+                    background-color: cyan;
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+
+        /* Style for the back button link */
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Change this to your preferred color */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button-link:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            border-color: #0056b3;
+            text-decoration: none;
+            color: white;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<h1>Employee Details</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Emp Id</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>DOB</th>
+        <th>Marital Status</th>
+        <th>Father Name</th>
+        <th>Mother Name</th>
+        <th>Mobile No.</th>
+        <th>Email Address</th>
+        <th>Permanent Addrs</th>
+        <th>Current Addrs</th>
+        <th>Job Title</th>
+        <th>Manager Name</th>
+        <th>DOJ</th>
+        <th>Emp Type</th>
+        <th>Work Location</th>
+        <th>Salary</th>
+        <th>Status</th>
+        <th>Temp Password</th>
+        <th>Bank Name</th>
+        <th>Account Number</th>
+        <th>Account Holder Name</th>
+        <th>Branch Name</th>
+        <th>IFSC Code</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:object="${employee}" th:with="s=${employee.status.toString()}">
+        <td th:text="${employee.empId}"></td>
+        <td th:text="${employee.name}"></td>
+        <td th:text="${employee.gender}"></td>
+        <td th:text="${employee.dob}"></td>
+        <td th:text="${employee.maritalStatus}"></td>
+        <td th:text="${employee.fatherName}"></td>
+        <td th:text="${employee.motherName}"></td>
+        <td th:text="${employee.mobileNo}"></td>
+        <td><a th:href="${employee.email}" th:text="${employee.email}"></a></td>
+        <td th:text="${employee.permanentAddress}"></td>
+        <td th:text="${employee.currentAddress}"></td>
+        <td th:text="${employee.jobTitle}"></td>
+        <td th:text="${employee.manager}"></td>
+        <td th:text="${employee.doj}"></td>
+        <td th:text="${employee.empType}"></td>
+        <td th:text="${employee.workLocation}"></td>
+        <td th:text="${employee.salary}"></td>
+
+        <td class="sts" th:style="${s=='ACTIVE' ? 'color:green' :
+         (s=='RESIGNED' ? 'color:red' : 'color:black')}"
+            th:text="${employee.status}"></td>
+
+        <td th:text="${employee.password}"></td>
+        <td th:text="${employee.bankName}"></td>
+        <td th:text="${employee.accNo}"></td>
+        <td th:text="${employee.accHolderName}"></td>
+        <td th:text="${employee.branchName}"></td>
+        <td th:text="${employee.ifscCode}"></td>
+    </tr>
+    </tbody>
+</table>
+<div class="form-group" style="width: 100%; text-align:center; position: fixed">
+    <a href="/hrHome" class="button-link">Back to Home Page</a>
+</div>
+
+</body>
+</html>

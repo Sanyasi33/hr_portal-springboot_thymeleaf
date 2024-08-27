@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Get Resign Requests</title>
+    <style>
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Success and Fail message styles */
+        .success-msg {
+            color: green;
+        }
+        .fail-msg {
+            color: red;
+        }
+
+
+
+        /* styles.css */
+
+        body {
+            background-color: lightseagreen;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-top: 60px; /* Add padding to ensure content is not hidden under the fixed header */
+        }
+
+        h1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: lightseagreen;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 15px 0;
+            z-index: 1000; /* Ensure it is above other content */
+            font-size: 24px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            padding: 8px 12px;
+            margin: 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        button:nth-of-type(1) {
+            background-color: #4CAF50; /* Green */
+        }
+
+        button:nth-of-type(2) {
+            background-color: #f44336; /* Red */
+        }
+
+        button:nth-of-type(3) {
+            background-color: #ffc107; /* Yellow */
+        }
+
+            /*To make status column Bold*/
+                .sts{
+                    font-weight: bold;
+                }
+
+                 /*Alternate row colors*/
+                tr:nth-child(odd) {
+                    background-color: lightblue;
+                }
+                tr:nth-child(even) {
+                    background-color: lightcyan;
+                }
+                /* Hover effect */
+                tbody tr:hover {
+                    background-color: #ddd;
+                }
+
+                /* Filter Container */
+                .filter-container {
+                    position: fixed;
+                    top: 40px;
+                    right: 10px;
+                    z-index: 10;
+                    background-color: cyan;
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+
+        .btn {
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 12px;
+        color: white;
+        background-color: #4CAF50;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+        text-align: center; /* Center align text */
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+        transform: translateY(-2px); /* Slight lift effect on hover */
+    }
+
+    .btn:active {
+        transform: translateY(1px); /* Slight press effect on click */
+    }
+
+        /* Styles for the back button link */
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Change this to your preferred color */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button-link:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            border-color: #0056b3;
+            text-decoration: none;
+            color: white;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <h1>All Resign Requests</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Resign Id</th>
+        <th>Emp Id</th>
+        <th>Emp Name</th>
+        <th>Resign Date</th>
+        <th>Resign Reason</th>
+        <th>Status</th>
+        <th>Approve Action</th>
+        <th>Reject Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="resignRequest : ${resignRequests}" th:with="s=${resignRequest.status.toString()}">
+        <td th:text="${resignRequest.id}"></td>
+        <td th:text="${resignRequest.resign.empId}"></td>
+        <td th:text="${resignRequest.resign.name}"></td>
+        <td th:text="${resignRequest.date}"></td>
+        <td th:text="${resignRequest.reason}"></td>
+
+        <td class="sts" th:style="${s=='APPROVED' ? 'color:green' :
+         (s=='REJECTED' ? 'color:red' : 'color:black')}"
+            th:text="${resignRequest.status}"></td>
+
+        <td style="align-content: center">
+            <form th:action="@{/approveResign/{id}(id=${resignRequest.id})}" method="post">
+                <button style="align-items: center; background-color: green" type="submit" class="btn" id="approveButton" onclick="showApproveAlert()">Approve</button>
+            </form>
+        </td>
+        <td style="align-content: center">
+            <form th:action="@{/rejectResign/{id}(id=${resignRequest.id})}" method="post">
+                <button style="align-items: center; background-color: red" type="submit" class="btn" id="rejectButton" onclick="showRejectAlert()">Reject</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="form-group" style="width: 100%; text-align:center">
+    <a href="/hrHome" class="button-link">Back to Home Page</a>
+</div>
+
+<br><br>
+
+    <!-- Modal for displaying messages -->
+    <div id="statusModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p style="text-align: center; font-weight: bold" id="modalMessage"></p>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle modal display and closing -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            const msg = urlParams.get('msg');
+
+            // Get the modal elements
+            const modal = document.getElementById('statusModal');
+            const modalMessage = document.getElementById('modalMessage');
+
+            // Display the modal with the message if status and msg parameters are present
+            if (status && msg) {
+                modalMessage.textContent = decodeURIComponent(msg);
+                modalMessage.className = status === 'success' ? 'success-msg' : 'fail-msg';
+                modal.style.display = 'block';
+            }
+
+            // Get the <span> element that closes the modal
+            const span = document.querySelector('.close');
+
+            // When the user clicks on <span> (x), close the modal
+            if (span) {
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+            }
+
+            // When the user clicks anywhere outside the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
+
+
+
+<!-- Alerts for Approve and Reject buttons -->
+<!--<script>
+    function showApproveAlert(){
+        alert("Resign APPROVED Successfully!");
+    }
+
+    function showRejectAlert(){
+        alert("Resign REJECTED Successfully!");
+    }
+</script>-->
+
+</body>
+</html>

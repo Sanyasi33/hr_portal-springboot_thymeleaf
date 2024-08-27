@@ -1,0 +1,85 @@
+<configuration status="DEBUG">
+    <!-- Define the file appender with time-based rolling policy -->
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!-- The main log file -->
+        <file>logs/HrPortal.log</file>
+
+        <!-- Configure the rolling policy to roll over every minute -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Define the pattern for the rolled-over files -->
+            <fileNamePattern>logs/sanny-%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <!-- Keep 5 log files, and roll over the files after reached max -->
+            <maxHistory>5</maxHistory>
+        </rollingPolicy>
+
+        <!-- Define the encoder with a pattern for the log format -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} --- [%level] --- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} --- [%level] --- %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- Define the root logger -->
+    <root level="info">
+        <appender-ref ref="ROLLING"/>
+        <appender-ref ref="Console"/>
+    </root>
+</configuration>
+
+
+<!--<configuration>
+    &lt;!&ndash; Define the file appender with time-based rolling policy &ndash;&gt;
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        &lt;!&ndash; The main log file &ndash;&gt;
+        <file>logs/HrPortal.log</file>
+        &lt;!&ndash; Define the encoder with a pattern for the log format &ndash;&gt;
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        &lt;!&ndash; Configure the rolling policy to roll over every minute &ndash;&gt;
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            &lt;!&ndash; Define the pattern for the rolled-over files &ndash;&gt;
+            <fileNamePattern>logs/HrPortal-%d{yyyy-MM-dd_HH-mm}.%i.log</fileNamePattern>
+            &lt;!&ndash; Keep 30 days' worth of log files, and roll over the files every day &ndash;&gt;
+            <maxHistory>30</maxHistory>
+            &lt;!&ndash; Optional: Specify the size of each log file before rolling over (e.g., 10MB) &ndash;&gt;
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    &lt;!&ndash;<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-10level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>&ndash;&gt;
+&lt;!&ndash; Define the root logger &ndash;&gt;
+    <root level="info">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>-->
+
+
+<!--<configuration status="DEBUG">
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/HrPortal.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/HrPortal-%d{yyyy-MM-dd_HH-mm}.%i.log</fileNamePattern>
+            <maxHistory>1440</maxHistory> &lt;!&ndash; Keeps logs for one day (1440 minutes) &ndash;&gt;
+            <totalSizeCap>5GB</totalSizeCap>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize> &lt;!&ndash; Optional size-based rolling &ndash;&gt;
+        </triggeringPolicy>
+    </appender>
+    <root level="info">
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>-->

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Employee</title>
+    <style>
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Success and Fail message styles */
+        .success-msg {
+            color: green;
+        }
+        .fail-msg {
+            color: red;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightseagreen;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-align: center; /* Center-align the labels */
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="number"],
+        form input[type="date"],
+        form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        form button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .custom-border {
+            border: 2px solid #eee;
+            padding: 20px;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        /* Form container styling */
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .form-group {
+            width: 48%;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .btn {
+        display: inline-block;
+        padding: 20px 30px;
+        font-size: 18px;
+        color: white;
+        background-color: #4CAF50;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+        text-align: center; /* Center align text */
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+        transform: translateY(-2px); /* Slight lift effect on hover */
+    }
+
+    .btn:active {
+        transform: translateY(1px); /* Slight press effect on click */
+    }
+
+        /* Style for the back button link */
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Change this to your preferred color */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button-link:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            border-color: #0056b3;
+            text-decoration: none;
+            color: white;
+        }
+
+
+    </style>
+</head>
+<body>
+<h1 align="center">Employee Update Form</h1>
+<form th:action="@{/updateEmployee(id=${employee.empId})}" method="post" class="custom-border" th:object="${employee}">
+    <!--<input type="hidden" th:field="*{empId}" />-->
+    <div class="form-container">
+        <div class="form-group">
+            <label for="name">Employee Name:</label>
+            <input type="text" id="name" th:field="*{name}" required>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" th:field="*{gender}" required>
+                <option value="" th:selected="${employee.gender==''}">Select Gender</option>
+                <option value="Male" th:selected="${employee.gender=='Male'}">Male</option>
+                <option value="Female" th:selected="${employee.gender=='Female'}">Female</option>
+                <option value="Other" th:selected="${employee.gender=='Other'}">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dob">DOB:</label>
+            <input type="date" id="dob" th:field="*{dob}" required>
+        </div>
+        <div class="form-group">
+            <label for="mStatus">Marital Status:</label>
+            <select id="mStatus" th:field="*{maritalStatus}" required>
+                <option value="" th:selected="${employee.maritalStatus==''}">Select Marital Status</option>
+                <option value="Married" th:selected="${employee.maritalStatus=='Married'}">Married</option>
+                <option value="Unmarried" th:selected="${employee.maritalStatus=='Unmarried'}">Unmarried</option>
+                <option value="Divorced" th:selected="${employee.maritalStatus=='Divorced'}">Divorced</option>
+                <option value="Widowed" th:selected="${employee.maritalStatus=='Widowed'}">Widowed</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fName">Father Name:</label>
+            <input type="text" id="fName" th:field="*{fatherName}" required>
+        </div>
+        <div class="form-group">
+            <label for="mName">Mother Name:</label>
+            <input type="text" id="mName" th:field="*{motherName}" required>
+        </div>
+        <div class="form-group">
+            <label for="mobileNo">Mobile No:</label>
+            <input type="number" id="mobileNo" th:field="*{mobileNo}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" required>
+        </div>
+        <div class="form-group">
+            <label for="pAddrs">Permanent Address:</label>
+            <input type="text" id="pAddrs" th:field="*{permanentAddress}" required>
+        </div>
+        <div class="form-group">
+            <label for="cAddrs">Current Address:</label>
+            <input type="text" id="cAddrs" th:field="*{currentAddress}" required>
+        </div>
+        <div class="form-group">
+            <label for="jobTitle">Job Title:</label>
+            <input type="text" id="jobTitle" th:field="*{jobTitle}" required>
+        </div>
+        <div class="form-group">
+            <label for="manager">Manager Name:</label>
+            <input type="text" id="manager" th:field="*{manager}" required>
+        </div>
+        <div class="form-group">
+            <label for="doj">DOJ:</label>
+            <input type="date" id="doj" th:field="*{doj}" required>
+        </div>
+        <div class="form-group">
+            <label for="empType">Emp Type:</label>
+            <input type="text" id="empType" th:field="*{empType}" required>
+        </div>
+        <div class="form-group">
+            <label for="workLocation">Work Location:</label>
+            <input type="text" id="workLocation" th:field="*{workLocation}" required>
+        </div>
+        <div class="form-group">
+            <label for="salary">Salary:</label>
+            <input type="number" id="salary" th:field="*{salary}" required>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Temp Password:</label>
+            <input type="text" id="pwd" th:field="*{password}" required>
+        </div>
+        <div class="form-group">
+            <label for="bankName">Bank Name:</label>
+            <input type="text" id="bankName" th:field="*{bankName}" required>
+        </div>
+        <div class="form-group">
+            <label for="accNo">Account No:</label>
+            <input type="number" id="accNo" th:field="*{accNo}" required>
+        </div>
+        <div class="form-group">
+            <label for="accHolderName">Account Holder Name:</label>
+            <input type="text" id="accHolderName" th:field="*{accHolderName}" required>
+        </div>
+        <div class="form-group">
+            <label for="branchName">Branch Name:</label>
+            <input type="text" id="branchName" th:field="*{branchName}" required>
+        </div>
+        <div class="form-group">
+            <label for="ifscCode">IFSC Code:</label>
+            <input type="text" id="ifscCode" th:field="*{ifscCode}" required>
+        </div>
+        <div class="form-group" style="width: 100%;">
+            <button type="submit" class="btn">Update Employee</button>
+        </div>
+        <div class="form-group" style="width: 100%; text-align:center">
+            <a href="/hrHome" class="button-link">Home Page</a>
+        </div>
+    </div>
+</form>
+
+<!-- Modal for displaying messages -->
+<div id="statusModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p style="text-align: center; font-weight: bold" id="modalMessage"></p>
+    </div>
+</div>
+
+<!-- JavaScript to handle modal display and closing -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const msg = urlParams.get('msg');
+
+        // Get the modal elements
+        const modal = document.getElementById('statusModal');
+        const modalMessage = document.getElementById('modalMessage');
+
+        // Display the modal with the message if status and msg parameters are present
+        if (status && msg) {
+            modalMessage.textContent = decodeURIComponent(msg);
+            modalMessage.className = status === 'success' ? 'success-msg' : 'fail-msg';
+            modal.style.display = 'block';
+        }
+
+        // Get the <span> element that closes the modal
+        const span = document.querySelector('.close');
+
+        // When the user clicks on <span> (x), close the modal
+        if (span) {
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+        }
+
+        // When the user clicks anywhere outside the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+
+    /* ----------------------Date Validation----------------------- */
+    document.addEventListener('DOMContentLoaded', (event) => {
+            const dobInput = document.getElementById('dob');
+            const dojInput = document.getElementById('doj');
+
+            // Set maximum date for dob and doj
+            const today = new Date().toISOString().split('T')[0];
+            dobInput.setAttribute('max', today);
+            dojInput.setAttribute('max', today);
+
+            // Set maximum date till yesterday
+            /* const today = new Date();
+            today.setDate(today.getDate() - 1); // Subtract 1 day to get yesterday
+            const yesterday = today.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+            document.getElementById('dobInput').setAttribute('max', yesterday);
+            document.getElementById('dojInput').setAttribute('max', yesterday); */
+
+        });
+
+</script>
+
+</body>
+</html>

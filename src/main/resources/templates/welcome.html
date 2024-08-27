@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome Page</title>
+
+    <style>
+
+        body {
+            background-color: lightseagreen;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 40%;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            color: lightseagreen;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between; /* Distribute space evenly between buttons */
+            gap: 10px; /* Optional: add space between buttons */
+        }
+
+        .button-group button {
+            flex: 1; /* Allow buttons to grow and take up available space */
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .button-group button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .button-group button:hover {
+            opacity: 0.8;
+        }
+
+        .links {
+            margin-top: 20px;
+        }
+
+        .links a {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            color: white;
+            background-color: #4CAF50;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .links a:hover {
+            background-color: #45a049;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+            text-align: center; /* Center align text */
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+            transform: translateY(-2px); /* Slight lift effect on hover */
+        }
+
+        .btn:active {
+            transform: translateY(1px); /* Slight press effect on click */
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <h1>Welcome to HR Portal</h1>
+
+    <!-- Form for HR Dashboard -->
+    <form th:action="@{/hrWelcome}" method="get">
+        <div class="button-group">
+            <button type="submit" class="btn">HR Dashboard</button>
+        </div>
+    </form>
+    <br><br>
+
+    <!-- Form for Employee Dashboard -->
+    <form th:action="@{/empWelcome}" method="get">
+        <div class="button-group">
+            <button type="submit" class="btn">Emp Dashboard</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

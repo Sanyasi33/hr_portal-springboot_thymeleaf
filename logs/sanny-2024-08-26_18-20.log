@@ -1,0 +1,18 @@
+2024-08-26 18:20:55 --- [INFO] --- Starting HrPortalApplication using Java 22.0.1 with PID 4728 (C:\Sahu\ProjectsWithIntellijCommunity\HrPortalWithThymeleaf\target\classes started by Administrator in C:\Sahu\ProjectsWithIntellijCommunity\HrPortalWithThymeleaf)
+2024-08-26 18:20:55 --- [INFO] --- No active profile set, falling back to 1 default profile: "default"
+2024-08-26 18:20:57 --- [INFO] --- Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-26 18:20:57 --- [INFO] --- Finished Spring Data repository scanning in 98 ms. Found 5 JPA repository interfaces.
+2024-08-26 18:20:58 --- [INFO] --- Tomcat initialized with port 8888 (http)
+2024-08-26 18:20:58 --- [INFO] --- Initializing ProtocolHandler ["http-nio-8888"]
+2024-08-26 18:20:58 --- [INFO] --- Starting service [Tomcat]
+2024-08-26 18:20:58 --- [INFO] --- Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-26 18:20:58 --- [INFO] --- Initializing Spring embedded WebApplicationContext
+2024-08-26 18:20:58 --- [INFO] --- Root WebApplicationContext: initialization completed in 2538 ms
+2024-08-26 18:20:58 --- [INFO] --- HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-26 18:20:58 --- [INFO] --- HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-26 18:20:59 --- [INFO] --- HHH000026: Second-level cache disabled
+2024-08-26 18:20:59 --- [INFO] --- No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-26 18:20:59 --- [INFO] --- HikariPool-1 - Starting...
+2024-08-26 18:20:59 --- [INFO] --- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5909ae90
+2024-08-26 18:20:59 --- [INFO] --- HikariPool-1 - Start completed.
+2024-08-26 18:20:59 --- [WARN] --- HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)

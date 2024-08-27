@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HR Home</title>
+    <style>
+        body {
+            background-color: lightseagreen;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            color: lightseagreen;
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+            gap: 20px; /* Space between buttons */
+        }
+
+        .button-container .row1 {
+            display: contents; /* Use the contents of this row in the grid layout */
+        }
+
+        .button-container .row2 {
+            display: contents; /* Use the contents of this row in the grid layout */
+        }
+        .button-container .row3 {
+            display: contents; /* Use the contents of this row in the grid layout */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 20px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #4CAF50;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+            text-align: center; /* Center align text */
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+            transform: translateY(-2px); /* Slight lift effect on hover */
+        }
+
+        .btn:active {
+            transform: translateY(1px); /* Slight press effect on click */
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>HR DashBoard</h1>
+    <div class="button-container">
+        <div class="row1">
+            <a href="/addEmployee" class="btn">Add Employee</a>
+            <a href="/getIdForUpdate" class="btn">Update Employee</a>
+        </div>
+        <div class="row2">
+            <a href="/getAppliedLeaves" class="btn">View Applied Leaves</a>
+            <a href="/getResignRequests" class="btn">View Resignation Requests</a>
+        </div>
+        <div class="row3">
+            <a href="/getAllEmployees" class="btn">View All Employees</a>
+            <a href="/getIdForSingleEmp" class="btn">View Single Employee</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

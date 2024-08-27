@@ -1,0 +1,24 @@
+2024-08-08 18:31:32 - Starting HrPortalApplication using Java 22.0.1 with PID 5848 (C:\Sahu\ProjectsWithIntellijCommunity\HrPortalWithThymeleaf\target\classes started by Administrator in C:\Sahu\ProjectsWithIntellijCommunity\HrPortalWithThymeleaf)
+2024-08-08 18:31:32 - No active profile set, falling back to 1 default profile: "default"
+2024-08-08 18:31:34 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-08 18:31:34 - Finished Spring Data repository scanning in 82 ms. Found 5 JPA repository interfaces.
+2024-08-08 18:31:35 - Tomcat initialized with port 8888 (http)
+2024-08-08 18:31:35 - Initializing ProtocolHandler ["http-nio-8888"]
+2024-08-08 18:31:35 - Starting service [Tomcat]
+2024-08-08 18:31:35 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-08 18:31:35 - Initializing Spring embedded WebApplicationContext
+2024-08-08 18:31:35 - Root WebApplicationContext: initialization completed in 2575 ms
+2024-08-08 18:31:35 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-08 18:31:35 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-08 18:31:35 - HHH000026: Second-level cache disabled
+2024-08-08 18:31:36 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-08 18:31:36 - HikariPool-1 - Starting...
+2024-08-08 18:31:36 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@9dc782d
+2024-08-08 18:31:36 - HikariPool-1 - Start completed.
+2024-08-08 18:31:36 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-08-08 18:31:38 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-08 18:31:38 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-08 18:31:39 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-08 18:31:39 - Starting ProtocolHandler ["http-nio-8888"]
+2024-08-08 18:31:39 - Tomcat started on port 8888 (http) with context path '/'
+2024-08-08 18:31:39 - Started HrPortalApplication in 7.808 seconds (process running for 8.678)

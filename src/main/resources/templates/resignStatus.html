@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>resign status</title>
+    <style>
+
+        body {
+            background-color: lightseagreen;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-top: 60px; /* To prevent content from being hidden under fixed header */
+        }
+
+        h1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: lightseagreen;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 15px 0;
+            z-index: 1000; /* Ensure it is above other content */
+            font-size: 24px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        button:nth-of-type(1) {
+            background-color: #4CAF50; /* Green */
+        }
+
+        button:nth-of-type(2) {
+            background-color: #f44336; /* Red */
+        }
+
+        button:nth-of-type(3) {
+            background-color: #ffc107; /* Yellow */
+        }
+
+        .sts {
+            font-weight: bold;
+        }
+
+        /* Alternate row colors */
+        tr:nth-child(odd) {
+            background-color: lightblue;
+        }
+        tr:nth-child(even) {
+            background-color: lightcyan;
+        }
+
+        /* Hover effect */
+        tbody tr:hover {
+            background-color: #ddd;
+        }
+
+
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 12px;
+            color: white;
+            background-color: #4CAF50;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+            text-align: center; /* Center align text */
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+            transform: translateY(-2px); /* Slight lift effect on hover */
+        }
+
+        .btn:active {
+            transform: translateY(1px); /* Slight press effect on click */
+        }
+
+        /* Style for the back button link */
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Change this to your preferred color */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button-link:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            border-color: #0056b3;
+            text-decoration: none;
+            color: white;
+        }
+
+
+    </style>
+</head>
+<body>
+<h1>View your resign request status</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Resign Id</th>
+        <th>Emp Id</th>
+        <th>Emp Name</th>
+        <th>Resign Date</th>
+        <th>Resign Reason</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rs : ${resignStatus}" th:with="s=${rs.status.toString()}">
+        <td th:text="${rs.id}"></td>
+        <td th:text="${rs.resign.empId}"></td>
+        <td th:text="${rs.resign.name}"></td>
+        <td th:text="${rs.date}"></td>
+        <td th:text="${rs.reason}"></td>
+
+        <td class="sts" th:style="${s=='APPROVED' ? 'color:green' :
+         (s=='REJECTED' ? 'color:red' : 'color:black')}"
+            th:text="${rs.status}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<div class="back-link-container" style="text-align:center">
+    <a th:href="@{/empHome(empId=${empId})}" class="button-link">Back to Home Page</a>
+</div>
+
+<br><br>
+
+</body>
+</html>
