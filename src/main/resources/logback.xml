@@ -8,7 +8,8 @@
         <!-- Configure the rolling policy to roll over every minute -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- Define the pattern for the rolled-over files -->
-            <fileNamePattern>logs/sanny-%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+                <!--<fileNamePattern>logs/sanny-%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>-->
+                <fileNamePattern>logs/sanny-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- Keep 5 log files, and roll over the files after reached max -->
             <maxHistory>5</maxHistory>
         </rollingPolicy>
