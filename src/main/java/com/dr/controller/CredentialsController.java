@@ -107,9 +107,6 @@ public class CredentialsController {
         return "denied";
     }
 
-
-
-
     //**************************** JWT Related... ****************************//
 
     @GetMapping("/loginForToken")

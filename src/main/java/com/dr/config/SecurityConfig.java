@@ -53,6 +53,11 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .permitAll()
                 )
+                .logout(lt->lt
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .permitAll()
+                )
                 .exceptionHandling(eh->eh
                         .accessDeniedPage("/denied")
                 );

@@ -12,7 +12,7 @@ public class HrController {
     }
 
     @GetMapping("/login")
-    public String HrLoginPage(){
+    public String LoginPage(){
         return "login";
     }
 
