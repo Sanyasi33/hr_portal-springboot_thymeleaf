@@ -93,8 +93,8 @@ public class CredentialsController {
     public String resetPwd(@RequestParam int empId, @RequestParam String pwd, @RequestParam String confirmPwd){
         if (pwd.equals(confirmPwd)){
             credentialsService.getIdPwd(empId, pwd);
-            return "redirect:/empWelcome";
-            //Now redirect to "/empWelcome" endpoint
+            return "redirect:/empHome?empId=" + empId;
+            //Now redirect to "/empHome" endpoint with empId
         }
         else{
             String msg=URLEncoder.encode("Passwords are not matching", StandardCharsets.UTF_8);
