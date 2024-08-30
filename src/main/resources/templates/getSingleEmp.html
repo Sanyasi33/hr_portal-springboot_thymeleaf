@@ -182,7 +182,7 @@
         <td th:text="${employee.fatherName}"></td>
         <td th:text="${employee.motherName}"></td>
         <td th:text="${employee.mobileNo}"></td>
-        <td><a th:href="${employee.email}" th:text="${employee.email}"></a></td>
+        <td><a th:href="'mailto:' + ${employee.email}" th:text="${employee.email}"></a></td>
         <td th:text="${employee.permanentAddress}"></td>
         <td th:text="${employee.currentAddress}"></td>
         <td th:text="${employee.jobTitle}"></td>
