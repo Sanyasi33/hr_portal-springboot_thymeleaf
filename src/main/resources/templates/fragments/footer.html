@@ -1,8 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Footer</title>
+    <style>
+        footer {
+            background-color: #00332a; /* Even darker teal color for footer */
+            padding: 20px;
+            color: white;
+            margin-top: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Optional: adds space between items */
+        }
+
+        footer div {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Space between label and content */
+        }
+
+        footer a {
+            color: lightcyan; /* Light color for better contrast */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: lightblue; /* Color change on hover for better visibility */
+        }
+    </style>
+</head>
+<body>
 <footer>
-    <div class="footer-container">
-        <p>&copy; 2024 HR Portal. All rights reserved.</p>
-    </div>
+    <div>DevRabbit IT Solutions</div>
+    <div>1180 Iron Point Rd, Suite 145, Folsom, CA 95630</div>
+    <div>Email: <a href="mailto:info@devrabbit.com">info@devrabbit.com</a></div>
+    <div>Phone: <a href="tel:+16503528686">+1-650-352-8686</a></div>
+    <div>Website: <a href="https://www.devrabbit.com" target="_blank">www.devrabbit.com</a></div>
 </footer>
-<script src="/scripts.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>

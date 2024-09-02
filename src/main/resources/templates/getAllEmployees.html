@@ -7,86 +7,94 @@
 /* styles.css */
 
 
-body {
-    background-color: lightseagreen;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    padding-top: 60px; /* Add padding to ensure content is not hidden under the fixed header */
-}
-
-        h1 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: lightseagreen;
-            color: #333;
-            text-align: center;
+        html, body {
+            height: 100%;
             margin: 0;
-            padding: 15px 0;
-            z-index: 1000; /* Ensure it is above other content */
-            font-size: 24px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
         }
 
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightseagreen;
+        }
 
-th, td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
+        main {
+            flex-grow: 1; /* This allows the main content to grow and push the footer down */
+        }
 
-th {
-    background-color: #f2f2f2;
-}
+        h2 {
+            color: green;
+            font-weight:bold;
+            text-align: center;
+            margin: 0;
+            margin-top: 3.5%;
+            padding: 0;
+            font-size: 25px;
+        }
+        u {
+            color: darkgreen;
+        }
 
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
+    table {
+        width: 80%;
+        margin: 20px 30px 20px 10px;
+        border-collapse: collapse;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-tr:hover {
-    background-color: #f1f1f1;
-}
+    th, td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
 
-a {
-    color: #3498db;
-    text-decoration: none;
-}
+    th {
+        background-color: orange;
+    }
 
-a:hover {
-    text-decoration: underline;
-}
-button {
-    padding: 8px 12px;
-    margin: 2px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    color: white;
-}
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
 
-button:hover {
-    opacity: 0.8;
-}
+    tr:hover {
+        background-color: #f1f1f1;
+    }
 
-button:nth-of-type(1) {
-    background-color: #4CAF50; /* Green */
-}
+    a {
+        color: #3498db;
+        text-decoration: none;
+    }
 
-button:nth-of-type(2) {
-    background-color: #f44336; /* Red */
-}
+    a:hover {
+        text-decoration: underline;
+    }
+    button {
+        padding: 8px 12px;
+        margin: 2px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        color: white;
+    }
 
-button:nth-of-type(3) {
-    background-color: #ffc107; /* Yellow */
-}
+    button:hover {
+        opacity: 0.8;
+    }
+
+    button:nth-of-type(1) {
+        background-color: #4CAF50; /* Green */
+    }
+
+    button:nth-of-type(2) {
+        background-color: #f44336; /* Red */
+    }
+
+    button:nth-of-type(3) {
+        background-color: #ffc107; /* Yellow */
+    }
 
     /*To make status column Bold*/
         .sts{
@@ -142,7 +150,12 @@ button:nth-of-type(3) {
 
 </head>
 <body>
-    <h1>All Employee Details</h1>
+
+<!-- Include Header -->
+<th:block th:replace="fragments/header"></th:block>
+
+<main>
+    <u><h2>ALL EMPLOYEE DETAILS</h2></u>
 <table border="1">
     <thead>
     <tr>
@@ -210,6 +223,10 @@ button:nth-of-type(3) {
 </div>
 
 <br><br>
-
+</main>
+<!-- Include Footer -->
+<!--<div style="position: fixed; width: 100%; bottom:0;">
+    <th:block th:replace="fragments/footer"></th:block>
+</div>-->
 </body>
 </html>

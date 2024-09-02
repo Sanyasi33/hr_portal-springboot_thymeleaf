@@ -4,11 +4,34 @@
     <meta charset="UTF-8">
     <title>Mark Attendance</title>
     <style>
-        body {
-            background-color: lightseagreen;
-            font-family: Arial, sans-serif;
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightseagreen;
+        }
+
+        main {
+            flex-grow: 1; /* This allows the main content to grow and push the footer down */
+        }
+
+        h2 {
+            color: green;
+            font-weight:bold;
+            text-align: center;
+            margin: 0;
+            margin-bottom: 25px;
+            padding: 0;
+            font-size: 30px;
+        }
+        u {
+            color: darkgreen;
         }
 
         .container {
@@ -19,11 +42,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             text-align: center;
-        }
-
-        h1 {
-            color: lightseagreen;
-            margin-bottom: 30px;
         }
 
         .button-container {
@@ -79,8 +97,13 @@
     </style>
 </head>
 <body>
+
+<!-- Include Header -->
+<th:block th:replace="fragments/header"></th:block>
+
+<main>
 <div class="container">
-    <h1>Mark Today's Attendance</h1>
+    <u><h2>Mark Today's Attendance</h2></u>
     <div class="button-container">
         <a th:href="@{/addCheckIn/{id}(id=${empId})}" class="btn">Check In</a>
         <a th:href="@{/addCheckOut/{id}(id=${empId})}" class="btn">Check-Out</a>
@@ -90,5 +113,10 @@
         <a th:href="@{/empHome(empId=${empId})}" class="button-link">Home Page</a>
     </div>
 </div>
+</main>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
+
 </body>
 </html>

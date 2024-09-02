@@ -4,26 +4,51 @@
     <meta charset="UTF-8">
     <title>Emp Home</title>
     <style>
-        body {
-            background-color: lightseagreen;
-            font-family: Arial, sans-serif;
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightseagreen;
+        }
+
+        main {
+            flex-grow: 1; /* This allows the main content to grow and push the footer down */
+        }
+
+        h2 {
+            color: green;
+            font-weight:bold;
+            text-align: center;
+            margin: 0;
+            margin-bottom: 25px;
+            padding: 0;
+            font-size: 30px;
+        }
+        u {
+            color: darkgreen;
+        }
+
+        /* Wrapper to push footer to the bottom */
+        .wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
-            width: 60%;
-            margin: 100px auto;
+            width: 50%;
+            margin: auto;
             padding: 20px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             text-align: center;
-        }
-
-        h1 {
-            color: lightseagreen;
-            margin-bottom: 30px;
         }
 
         .button-container {
@@ -74,8 +99,12 @@
     </style>
 </head>
 <body>
+
+<!-- Include Header -->
+<th:block th:replace="fragments/header"></th:block>
+
 <div class="container">
-    <h1>Employee DashBoard</h1>
+    <u><h2>EMPLOYEE DASHBOARD</h2></u>
     <div class="button-container">
         <div class="row1">
             <a th:href="@{/markAttendance/{id}(id=${empId})}" class="btn">Mark Attendance</a>
@@ -95,5 +124,9 @@
         <button type="submit" class="btn btn-logout">Logout</button>
     </form>
 </div>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
+
 </body>
 </html>

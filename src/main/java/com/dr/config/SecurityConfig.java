@@ -30,8 +30,8 @@ public class SecurityConfig {
                  // HR endpoints
                 .requestMatchers("/hrHome" ,"/addEmployee", "/getIdForUpdate", "/updateEmployee",
                               "/getAllEmployees", "/getIdForSingleEmp", "/getSingleEmp", "/getAppliedLeaves",
-                              "/approveLeave/", "/rejectLeave/", "/getResignRequests", "/approveResign/",
-                              "/rejectResign/").hasAuthority("ROLE_HR")
+                              "/approveLeave/{id}", "/rejectLeave/{id}", "/getResignRequests", "/approveResign/{id}",
+                              "/rejectResign/{id}").hasAuthority("ROLE_HR")
 
 
                 // Employee endpoints

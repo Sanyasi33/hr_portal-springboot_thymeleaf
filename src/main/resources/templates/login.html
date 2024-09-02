@@ -4,16 +4,29 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
         body {
             background-color: lightseagreen;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        }
+
+        /* Wrapper to push footer to the bottom */
+        .wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
-            width: 40%;
-            margin: 100px auto;
+            width: 50%;
+            margin: auto;
             padding: 20px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -116,27 +129,32 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Login</h1>
-    <form th:action="@{/login}" method="post">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div class="button-group">
-            <button type="reset" class="btn">Reset</button>
-            <button type="submit" class="btn">Submit</button>
-        </div>
+<!-- Wrapper to contain the content and push the footer down -->
+<div class="wrapper">
+    <!-- Include Header -->
+    <th:block th:replace="fragments/header"></th:block>
 
-        <!--<div class="links">
-            <a href="http://localhost:8888/HrWelcome">Back to Welcome Page</a>
-            </div>-->
-
-    </form>
+    <div class="container">
+        <h1>Login</h1>
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="button-group">
+                <button type="reset" class="btn">Reset</button>
+                <button type="submit" class="btn">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
+
 </body>
 </html>

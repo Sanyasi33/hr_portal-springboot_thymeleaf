@@ -53,13 +53,19 @@
             padding: 0;
         }
 
-        h1 {
-            color: #333;
+        h2 {
+            color: green;
+            font-weight:bold;
+        }
+
+        u {
+            color: darkgreen;
         }
 
         form {
             max-width: 600px;
             margin: 20px auto;
+            margin-top:9%;
             padding: 10px;
             background: #fff;
             border-radius: 8px;
@@ -197,8 +203,12 @@
     </style>
 </head>
 <body>
-<h1 align="center">Employee Update Form</h1>
+
+<!-- Include Header -->
+<th:block th:replace="fragments/header"></th:block>
+
 <form th:action="@{/updateEmployee(id=${employee.empId})}" method="post" class="custom-border" th:object="${employee}">
+    <u><h2 align="center">EMPLOYEE UPDATE FORM</h2></u>
     <!--<input type="hidden" th:field="*{empId}" />-->
     <div class="form-container">
         <div class="form-group">
@@ -374,6 +384,9 @@
         });
 
 </script>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
 
 </body>
 </html>

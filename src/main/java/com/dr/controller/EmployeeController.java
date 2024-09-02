@@ -62,15 +62,15 @@ public class EmployeeController {
     }
 
     @GetMapping("/updateEmployee")
-    public String updateEmployee(@RequestParam int id, Model model){
-        Employee employee = empService.getEmployee(id);
+    public String updateEmployee(@RequestParam int empId, Model model){
+        Employee employee = empService.getEmployee(empId);
         if (employee!=null){
             model.addAttribute("employee", employee);
             return "updateEmployee";
         }
         else{
             String msg=URLEncoder.encode("Please Enter valid Emp Id", StandardCharsets.UTF_8);
-            return "redirect:/getIdForUpdate?status=fail&msg="+msg;
+            return "redirect:/hrHome?status=fail&msg="+msg;
         }
     }
 
@@ -87,7 +87,7 @@ public class EmployeeController {
         try {
             Employee employee = empService.updateEmployee(id, employeeDto);
             msg=URLEncoder.encode("Employee Details Updated Successfully", StandardCharsets.UTF_8);
-            return "redirect:/updateEmployee?status=success&msg=" + msg + "&id=" + id;
+            return "redirect:/updateEmployee?status=success&msg=" + msg + "&empId=" + id;
         }
         catch (Exception e){
             msg=URLEncoder.encode("Something Went Wrong Please Try Again Later", StandardCharsets.UTF_8);
@@ -129,7 +129,7 @@ public class EmployeeController {
         }
         else{
             String msg=URLEncoder.encode("Please Enter valid Emp Id", StandardCharsets.UTF_8);
-            return "redirect:/getIdForSingleEmp?status=fail&msg="+msg;
+            return "redirect:/hrHome?status=fail&msg="+msg;
         }
     }
 

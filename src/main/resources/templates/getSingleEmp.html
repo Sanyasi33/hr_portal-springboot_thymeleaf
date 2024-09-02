@@ -6,31 +6,39 @@
 
         /* styles.css */
 
-        body {
-            background-color: lightseagreen;
-            font-family: Arial, sans-serif;
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
-            padding-top: 60px; /* Add padding to ensure content is not hidden under the fixed header */
+            display: flex;
+            flex-direction: column;
         }
 
-        h1 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        body {
+            font-family: Arial, sans-serif;
             background-color: lightseagreen;
-            color: #333;
+        }
+
+        main {
+            flex-grow: 1; /* This allows the main content to grow and push the footer down */
+        }
+
+        h2 {
+            color: green;
+            font-weight:bold;
             text-align: center;
             margin: 0;
-            padding: 15px 0;
-            z-index: 1000; /* Ensure it is above other content */
-            font-size: 24px;
+            margin-top: 3.5%;
+            padding: 0;
+            font-size: 25px;
+        }
+        u {
+            color: darkgreen;
         }
 
         table {
             width: 80%;
-            margin: 20px auto;
+            margin: 20px 30px 20px 10px;
             border-collapse: collapse;
             background: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -43,7 +51,7 @@
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: orange;
         }
 
         tr:nth-child(even) {
@@ -142,71 +150,81 @@
 
 </head>
 <body>
-<h1>Employee Details</h1>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Emp Id</th>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>DOB</th>
-        <th>Marital Status</th>
-        <th>Father Name</th>
-        <th>Mother Name</th>
-        <th>Mobile No.</th>
-        <th>Email Address</th>
-        <th>Permanent Addrs</th>
-        <th>Current Addrs</th>
-        <th>Job Title</th>
-        <th>Manager Name</th>
-        <th>DOJ</th>
-        <th>Emp Type</th>
-        <th>Work Location</th>
-        <th>Salary</th>
-        <th>Status</th>
-        <th>Temp Password</th>
-        <th>Bank Name</th>
-        <th>Account Number</th>
-        <th>Account Holder Name</th>
-        <th>Branch Name</th>
-        <th>IFSC Code</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:object="${employee}" th:with="s=${employee.status.toString()}">
-        <td th:text="${employee.empId}"></td>
-        <td th:text="${employee.name}"></td>
-        <td th:text="${employee.gender}"></td>
-        <td th:text="${employee.dob}"></td>
-        <td th:text="${employee.maritalStatus}"></td>
-        <td th:text="${employee.fatherName}"></td>
-        <td th:text="${employee.motherName}"></td>
-        <td th:text="${employee.mobileNo}"></td>
-        <td><a th:href="'mailto:' + ${employee.email}" th:text="${employee.email}"></a></td>
-        <td th:text="${employee.permanentAddress}"></td>
-        <td th:text="${employee.currentAddress}"></td>
-        <td th:text="${employee.jobTitle}"></td>
-        <td th:text="${employee.manager}"></td>
-        <td th:text="${employee.doj}"></td>
-        <td th:text="${employee.empType}"></td>
-        <td th:text="${employee.workLocation}"></td>
-        <td th:text="${employee.salary}"></td>
 
-        <td class="sts" th:style="${s=='ACTIVE' ? 'color:green' :
-         (s=='RESIGNED' ? 'color:red' : 'color:black')}"
-            th:text="${employee.status}"></td>
+<!-- Include Header -->
+<th:block th:replace="fragments/header"></th:block>
 
-        <td th:text="${employee.password}"></td>
-        <td th:text="${employee.bankName}"></td>
-        <td th:text="${employee.accNo}"></td>
-        <td th:text="${employee.accHolderName}"></td>
-        <td th:text="${employee.branchName}"></td>
-        <td th:text="${employee.ifscCode}"></td>
-    </tr>
-    </tbody>
-</table>
-<div class="form-group" style="width: 100%; text-align:center; position: fixed">
-    <a href="/hrHome" class="button-link">Back to Home Page</a>
+<main>
+    <u><h2>EMPLOYEE DETAILS</h2></u>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Emp Id</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>Marital Status</th>
+            <th>Father Name</th>
+            <th>Mother Name</th>
+            <th>Mobile No.</th>
+            <th>Email Address</th>
+            <th>Permanent Addrs</th>
+            <th>Current Addrs</th>
+            <th>Job Title</th>
+            <th>Manager Name</th>
+            <th>DOJ</th>
+            <th>Emp Type</th>
+            <th>Work Location</th>
+            <th>Salary</th>
+            <th>Status</th>
+            <th>Temp Password</th>
+            <th>Bank Name</th>
+            <th>Account Number</th>
+            <th>Account Holder Name</th>
+            <th>Branch Name</th>
+            <th>IFSC Code</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:object="${employee}" th:with="s=${employee.status.toString()}">
+            <td th:text="${employee.empId}"></td>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.gender}"></td>
+            <td th:text="${employee.dob}"></td>
+            <td th:text="${employee.maritalStatus}"></td>
+            <td th:text="${employee.fatherName}"></td>
+            <td th:text="${employee.motherName}"></td>
+            <td th:text="${employee.mobileNo}"></td>
+            <td><a th:href="'mailto:' + ${employee.email}" th:text="${employee.email}"></a></td>
+            <td th:text="${employee.permanentAddress}"></td>
+            <td th:text="${employee.currentAddress}"></td>
+            <td th:text="${employee.jobTitle}"></td>
+            <td th:text="${employee.manager}"></td>
+            <td th:text="${employee.doj}"></td>
+            <td th:text="${employee.empType}"></td>
+            <td th:text="${employee.workLocation}"></td>
+            <td th:text="${employee.salary}"></td>
+
+            <td class="sts" th:style="${s=='ACTIVE' ? 'color:green' :
+             (s=='RESIGNED' ? 'color:red' : 'color:black')}"
+                th:text="${employee.status}"></td>
+
+            <td th:text="${employee.password}"></td>
+            <td th:text="${employee.bankName}"></td>
+            <td th:text="${employee.accNo}"></td>
+            <td th:text="${employee.accHolderName}"></td>
+            <td th:text="${employee.branchName}"></td>
+            <td th:text="${employee.ifscCode}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="form-group" style="width: 100%; text-align:center;">
+        <a href="/hrHome" class="button-link">Back to Home Page</a>
+    </div>
+</main>
+<!-- Include Footer -->
+<div style="position: fixed; width: 100%; bottom:0;">
+    <th:block th:replace="fragments/footer"></th:block>
 </div>
 
 </body>

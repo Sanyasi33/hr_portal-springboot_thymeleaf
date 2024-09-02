@@ -4,99 +4,312 @@
     <meta charset="UTF-8">
     <title>HR Home</title>
     <style>
-        body {
-            background-color: lightseagreen;
-            font-family: Arial, sans-serif;
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
         }
 
-        .container {
-            width: 60%;
-            margin: 100px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightseagreen;
+        }
+
+        main {
+            flex-grow: 1; /* This allows the main content to grow and push the footer down */
+        }
+
+         h2 {
+            color: green;
+            font-weight:bold;
             text-align: center;
+            margin: 0;
+            margin-bottom: 25px;
+            padding: 0;
+            font-size: 30px;
+        }
+        u {
+            color: darkgreen;
         }
 
-        h1 {
-            color: lightseagreen;
-            margin-bottom: 30px;
+         /* Wrapper to push footer to the bottom */
+         .wrapper {
+             flex: 1;
+             display: flex;
+             flex-direction: column;
+         }
+
+         .container {
+             width: 50%;
+             margin: auto;
+             padding: 20px;
+             background-color: white;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+             border-radius: 10px;
+             text-align: center;
+         }
+
+         .button-container {
+             display: grid;
+             grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+             gap: 20px; /* Space between buttons */
+         }
+
+         .button-container .row1,
+         .button-container .row2,
+         .button-container .row3 {
+             display: contents; /* Use the contents of this row in the grid layout */
+         }
+
+         .btn {
+             display: inline-block;
+             padding: 20px 30px;
+             font-size: 18px;
+             color: white;
+             background-color: #4CAF50;
+             text-decoration: none;
+             border-radius: 5px;
+             transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+             text-align: center; /* Center align text */
+         }
+
+         .btn:hover {
+             background-color: #45a049;
+             transform: translateY(-2px); /* Slight lift effect on hover */
+         }
+
+         .btn:active {
+             transform: translateY(1px); /* Slight press effect on click */
+         }
+
+         .btn-logout {
+             background-color: #f44336; /* Red background for logout button */
+             color: white;
+         }
+
+         .btn-logout:hover {
+             background-color: #d32f2f; /* Darker red on hover */
+         }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            padding-top: 60px;
         }
 
-        .button-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Two columns layout */
-            gap: 20px; /* Space between buttons */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 5% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px;
+            border-radius: 10px;
         }
 
-        .button-container .row1 {
-            display: contents; /* Use the contents of this row in the grid layout */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
         }
 
-        .button-container .row2 {
-            display: contents; /* Use the contents of this row in the grid layout */
-        }
-        .button-container .row3 {
-            display: contents; /* Use the contents of this row in the grid layout */
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 20px 30px;
-            font-size: 18px;
+        /* Success and Fail message styles */
+        .success-msg {
+            color: green;
+        }
+        .fail-msg {
+            color: red;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            display: block;
+            margin: 0 auto;
+            align: center;
+            height: 20px;
+        }
+
+        .btnModal {
+            display: block;  /* Make the button a block-level element */
+            margin: 10px auto; /* Center the button horizontally */
+            text-align: center;
+            font-size: 15px;
             color: white;
             background-color: #4CAF50;
-            text-decoration: none;
+            padding: 10px 20px; /* Add some padding for a better appearance */
+            border: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-            text-align: center; /* Center align text */
+            cursor: pointer; /* Change cursor to pointer on hover */
         }
 
-        .btn:hover {
-            background-color: #45a049;
-            transform: translateY(-2px); /* Slight lift effect on hover */
-        }
+        .btnModal:hover {
+             background-color: #45a049;
+             transform: translateY(-2px); /* Slight lift effect on hover */
+         }
 
-        .btn:active {
-            transform: translateY(1px); /* Slight press effect on click */
-        }
+         .btnModal:active {
+             transform: translateY(1px); /* Slight press effect on click */
+         }
 
-        <!--Logout button styling-->
-        .btn-logout {
-            background-color: #f44336; /* Red background for logout button */
-            color: white;
-        }
-
-        .btn-logout:hover {
-            background-color: #d32f2f; /* Darker red on hover */
-        }
 
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>HR DashBoard</h1>
-    <div class="button-container">
-        <div class="row1">
-            <a href="/addEmployee" class="btn">Add Employee</a>
-            <a href="/getIdForUpdate" class="btn">Update Employee</a>
+<!-- Wrapper to contain the content and push the footer down -->
+<div class="wrapper">
+    <!-- Include Header -->
+    <th:block th:replace="fragments/header"></th:block>
+
+    <div class="container">
+        <u><h2>HR DASHBOARD</h2></u>
+        <div class="button-container">
+            <div class="row1">
+                <a href="/addEmployee" class="btn">Add Employee</a>
+                <a href="#" class="btn" id="updateEmployeeBtn">Update Employee</a>
+            </div>
+            <div class="row2">
+                <a href="/getAppliedLeaves" class="btn">View Applied Leaves</a>
+                <a href="/getResignRequests" class="btn">View Resignation Requests</a>
+            </div>
+            <div class="row3">
+                <a href="/getAllEmployees" class="btn">View All Employees</a>
+                <a href="#" class="btn" id="singleEmpBtn">View Single Employee</a>
+            </div>
         </div>
-        <div class="row2">
-            <a href="/getAppliedLeaves" class="btn">View Applied Leaves</a>
-            <a href="/getResignRequests" class="btn">View Resignation Requests</a>
-        </div>
-        <div class="row3">
-            <a href="/getAllEmployees" class="btn">View All Employees</a>
-            <a href="/getIdForSingleEmp" class="btn">View Single Employee</a>
-        </div>
+        <br>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-logout">Logout</button>
+        </form>
     </div>
-    <br>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-logout">Logout</button>
-    </form>
 </div>
+
+<!-- Modal for entering empId for Update Employee -->
+<div id="empIdModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Enter Employee ID for Update</h3>
+        <form th:action="@{/updateEmployee}" method="get">
+            <input type="number" id="inputModal" name="empId" required>
+            <button type="submit" class="btnModal">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal for entering empId for View Single Employee -->
+<div id="singleEmpModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Enter Employee ID to View</h3>
+        <form th:action="@{/getSingleEmp}" method="get">
+            <input type="number" id="inputModalSingleEmp" name="empId" required>
+            <button type="submit" class="btnModal">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal for displaying messages -->
+<div id="statusModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p style="text-align: center; font-weight: bold" id="modalMessage"></p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Modal for entering empId for Update Employee
+        var empIdModal = document.getElementById("empIdModal");
+        var empIdBtn = document.getElementById("updateEmployeeBtn");
+        var empIdClose = empIdModal.querySelector(".close");
+
+        empIdBtn.onclick = function() {
+            empIdModal.style.display = "block";
+        }
+
+        empIdClose.onclick = function() {
+            empIdModal.style.display = "none";
+        }
+
+        // Modal for entering empId for View Single Employee
+        var singleEmpModal = document.getElementById("singleEmpModal");
+        var singleEmpBtn = document.getElementById("singleEmpBtn");
+        var getIdForSingleEmpClose = singleEmpModal.querySelector(".close");
+
+        singleEmpBtn.onclick = function() {
+            singleEmpModal.style.display = "block";
+        }
+
+        getIdForSingleEmpClose.onclick = function() {
+            singleEmpModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == empIdModal) {
+                empIdModal.style.display = "none";
+            } else if (event.target == singleEmpModal) {
+                singleEmpModal.style.display = "none";
+            }
+        }
+
+        // Modal for displaying status messages
+        var statusModal = document.getElementById('statusModal');
+        var statusClose = statusModal.querySelector(".close");
+        var modalMessage = document.getElementById('modalMessage');
+
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const msg = urlParams.get('msg');
+
+        // Display the status modal if there are parameters in the URL
+        if (status && msg) {
+            modalMessage.textContent = decodeURIComponent(msg);
+            modalMessage.className = status === 'success' ? 'success-msg' : 'fail-msg';
+            statusModal.style.display = 'block';
+        }
+
+        // Close the status modal when the user clicks the close button
+        statusClose.onclick = function() {
+            statusModal.style.display = 'none';
+        }
+
+        // Close the status modal when the user clicks outside the modal
+        window.onclick = function(event) {
+            if (event.target == statusModal) {
+                statusModal.style.display = 'none';
+            }
+        }
+    });
+</script>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
+
+
 </body>
 </html>

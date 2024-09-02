@@ -1,19 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR Portal</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file -->
+    <title>Header</title>
+    <style>
+        header {
+            background-color: #004d40; /* Darker teal color */
+            padding: 5px 15px; /* Adjusted padding */
+            text-align: center;
+            color: lightseagreen;
+            font-size: 18px; /* Adjusted font size */
+            border-bottom: 2px solid #00332a; /* Optional: Add a border for visual separation */
+
+            position: fixed; /* Fixes the header at the top */
+            top: 0; /* Positions the header at the top of the page */
+            left: 0;
+            width: 100%; /* Ensures the header spans the entire width of the viewport */
+            z-index: 1000; /* Ensures the header stays on top of other content */
+        }
+        body {
+            margin-top: 60px; /* Adds space at the top to avoid content being hidden behind the header */
+        }
+    </style>
 </head>
 <body>
 <header>
-    <div class="header-container">
-        <h1>HR Portal</h1>
-        <nav>
-            <a href="/hrHome">Dashboard</a>
-            <a href="/profile">Profile</a>
-            <a href="/logout">Logout</a>
-        </nav>
-    </div>
+    <h1>DevRabbit IT Solutions PVT LTD</h1>
 </header>
+</body>
+</html>

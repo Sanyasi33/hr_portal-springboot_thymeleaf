@@ -47,26 +47,34 @@
         }
 
 
-        body {
-            background-color: lightseagreen;
-            font-family: Arial, sans-serif;
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
-            padding-top: 60px; /* To prevent content from being hidden under fixed header */
+            display: flex;
+            flex-direction: column;
         }
 
-        h1 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        body {
+            font-family: Arial, sans-serif;
             background-color: lightseagreen;
-            color: #333;
+        }
+
+        main {
+            flex-grow: 1; /* This allows the main content to grow and push the footer down */
+        }
+
+        h2 {
+            color: green;
+            font-weight:bold;
             text-align: center;
             margin: 0;
-            padding: 15px 0;
-            z-index: 1000; /* Ensure it is above other content */
-            font-size: 24px;
+            margin-top: 3.5%;
+            padding: 0;
+            font-size: 25px;
+        }
+        u {
+            color: darkgreen;
         }
 
         table {
@@ -84,7 +92,7 @@
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: orange;
         }
 
         tr:nth-child(even) {
@@ -193,116 +201,125 @@
     </style>
 </head>
 <body>
-<h1>All Leave Requests</h1>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>Leave Id</th>
-        <th>Emp Id</th>
-        <th>Emp Name</th>
-        <th>Leave Type</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>No of Days</th>
-        <th>Leave Reason</th>
-        <th>Status</th>
-        <th>Approve Actions</th>
-        <th>Reject Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="leaveRequest : ${leaveRequests}" th:with="s=${leaveRequest.status.toString()}">
-        <td th:text="${leaveRequest.id}"></td>
-        <td th:text="${leaveRequest.leave.empId}"></td>
-        <td th:text="${leaveRequest.leave.name}"></td>
-        <td th:text="${leaveRequest.leaveType}"></td>
-        <td th:text="${leaveRequest.startDate}"></td>
-        <td th:text="${leaveRequest.endDate}"></td>
-        <td th:text="${leaveRequest.noOfDays}"></td>
-        <td th:text="${leaveRequest.reason}"></td>
+<!-- Include Header -->
+<th:block th:replace="fragments/header"></th:block>
 
-        <td class="sts" th:style="${s=='APPROVED' ? 'color:green' :
-             (s=='REJECTED' ? 'color:red' : 'color:black')}"
-            th:text="${leaveRequest.status}"></td>
+<main>
+    <u><h2>ALL LEAVE REQUESTS</h2></u>
 
-        <td style="align-content: center">
-            <form th:action="@{/approveLeave/{id}(id=${leaveRequest.id})}" method="post">
-                <button style="align-items: center; background-color: green" type="submit" class="btn" id="approveButton" onclick="showApproveAlert()">Approve</button>
-            </form>
-        </td>
-        <td style="align-content: center">
-            <form th:action="@{/rejectLeave/{id}(id=${leaveRequest.id})}" method="post">
-                <button style="align-items: center; background-color: red" type="submit" class="btn" id="rejectButton" onclick="showRejectAlert()">Reject</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Leave Id</th>
+            <th>Emp Id</th>
+            <th>Emp Name</th>
+            <th>Leave Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>No of Days</th>
+            <th>Leave Reason</th>
+            <th>Status</th>
+            <th>Approve Actions</th>
+            <th>Reject Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="leaveRequest : ${leaveRequests}" th:with="s=${leaveRequest.status.toString()}">
+            <td th:text="${leaveRequest.id}"></td>
+            <td th:text="${leaveRequest.leave.empId}"></td>
+            <td th:text="${leaveRequest.leave.name}"></td>
+            <td th:text="${leaveRequest.leaveType}"></td>
+            <td th:text="${leaveRequest.startDate}"></td>
+            <td th:text="${leaveRequest.endDate}"></td>
+            <td th:text="${leaveRequest.noOfDays}"></td>
+            <td th:text="${leaveRequest.reason}"></td>
 
-<br>
+            <td class="sts" th:style="${s=='APPROVED' ? 'color:green' :
+                 (s=='REJECTED' ? 'color:red' : 'color:black')}"
+                th:text="${leaveRequest.status}"></td>
 
-<div class="back-link-container" style="text-align:center">
-    <a href="/hrHome" class="button-link">Back to Home Page</a>
-</div>
+            <td style="align-content: center">
+                <form th:action="@{/approveLeave/{id}(id=${leaveRequest.id})}" method="post">
+                    <button style="align-items: center; background-color: green" type="submit" class="btn" id="approveButton" onclick="showApproveAlert()">Approve</button>
+                </form>
+            </td>
+            <td style="align-content: center">
+                <form th:action="@{/rejectLeave/{id}(id=${leaveRequest.id})}" method="post">
+                    <button style="align-items: center; background-color: red" type="submit" class="btn" id="rejectButton" onclick="showRejectAlert()">Reject</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-<br><br>
+    <br>
 
-<!-- Modal for displaying messages -->
-<div id="statusModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p style="text-align: center; font-weight: bold" id="modalMessage"></p>
+    <div class="back-link-container" style="text-align:center">
+        <a href="/hrHome" class="button-link">Back to Home Page</a>
     </div>
-</div>
 
-<!-- JavaScript to handle modal display and closing -->
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const status = urlParams.get('status');
-        const msg = urlParams.get('msg');
+    <br><br>
 
-        // Get the modal elements
-        const modal = document.getElementById('statusModal');
-        const modalMessage = document.getElementById('modalMessage');
+    <!-- Modal for displaying messages -->
+    <div id="statusModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p style="text-align: center; font-weight: bold" id="modalMessage"></p>
+        </div>
+    </div>
 
-        // Display the modal with the message if status and msg parameters are present
-        if (status && msg) {
-            modalMessage.textContent = decodeURIComponent(msg);
-            modalMessage.className = status === 'success' ? 'success-msg' : 'fail-msg';
-            modal.style.display = 'block';
-        }
+    <!-- JavaScript to handle modal display and closing -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            const msg = urlParams.get('msg');
 
-        // Get the <span> element that closes the modal
-        const span = document.querySelector('.close');
+            // Get the modal elements
+            const modal = document.getElementById('statusModal');
+            const modalMessage = document.getElementById('modalMessage');
 
-        // When the user clicks on <span> (x), close the modal
-        if (span) {
-            span.onclick = function() {
-                modal.style.display = "none";
+            // Display the modal with the message if status and msg parameters are present
+            if (status && msg) {
+                modalMessage.textContent = decodeURIComponent(msg);
+                modalMessage.className = status === 'success' ? 'success-msg' : 'fail-msg';
+                modal.style.display = 'block';
             }
-        }
 
-        // When the user clicks anywhere outside the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            // Get the <span> element that closes the modal
+            const span = document.querySelector('.close');
+
+            // When the user clicks on <span> (x), close the modal
+            if (span) {
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
             }
+
+            // When the user clicks anywhere outside the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
+
+    <!--<script>
+        function showApproveAlert(){
+            alert("Leave Approved Successfully!");
         }
-    });
-</script>
 
-<!--<script>
-    function showApproveAlert(){
-        alert("Leave Approved Successfully!");
-    }
+        function showRejectAlert(){
+            alert("Leave Rejected Successfully!");
+        }
+    </script>-->
+</main>
 
-    function showRejectAlert(){
-        alert("Leave Rejected Successfully!");
-    }
-</script>-->
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
 
 </body>
 </html>

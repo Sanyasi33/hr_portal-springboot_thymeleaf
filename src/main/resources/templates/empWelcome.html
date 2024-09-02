@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Emp Welcome</title>
-
     <style>
-
         /* The Modal (background) */
         .modal {
             display: none; /* Hidden by default */
@@ -48,17 +46,29 @@
             color: red;
         }
 
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
 
         body {
             background-color: lightseagreen;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        }
+
+        /* Wrapper to push footer to the bottom */
+        .wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
-            width: 40%;
-            margin: 100px auto;
+            width: 50%;
+            margin: auto;
             padding: 20px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -160,21 +170,26 @@
         }
 
     </style>
-
 </head>
 <body>
-<div class="container">
-    <h1>Employee Welcome Page</h1>
-    <form th:action="@{/empHome}" method="get">
-        <div class="form-group">
-            <label for="empId">Enter Your Emp Id</label>
-            <input type="number" id="empId" name="empId" required>
+<!-- Wrapper to contain the content and push the footer down -->
+<div class="wrapper">
+    <!-- Include Header -->
+    <th:block th:replace="fragments/header"></th:block>
+        <div class="container">
+            <h1>Employee Welcome Page</h1>
+            <form th:action="@{/empHome}" method="get">
+                <div class="form-group">
+                    <label for="empId">Enter Your Emp Id</label>
+                    <input type="number" id="empId" name="empId" required>
+                </div>
+                <div class="button-group">
+                    <button type="reset" class="btn">Clear</button>
+                    <button type="submit" class="btn">Dashboard</button>
+                </div>
+            </form>
         </div>
-        <div class="button-group">
-            <button type="reset" class="btn">Clear</button>
-            <button type="submit" class="btn">Dashboard</button>
-        </div>
-    </form>
+    </div>
 </div>
 
 <!-- Modal for displaying messages -->
@@ -222,6 +237,9 @@
         }
     });
 </script>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
 
 </body>
 </html>

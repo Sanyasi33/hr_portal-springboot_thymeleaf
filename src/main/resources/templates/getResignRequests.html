@@ -50,26 +50,34 @@
 
         /* styles.css */
 
-        body {
-            background-color: lightseagreen;
-            font-family: Arial, sans-serif;
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
-            padding-top: 60px; /* Add padding to ensure content is not hidden under the fixed header */
+            display: flex;
+            flex-direction: column;
         }
 
-        h1 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        body {
+            font-family: Arial, sans-serif;
             background-color: lightseagreen;
-            color: #333;
+        }
+
+        main {
+            flex-grow: 1; /* This allows the main content to grow and push the footer down */
+        }
+
+        h2 {
+            color: green;
+            font-weight:bold;
             text-align: center;
             margin: 0;
-            padding: 15px 0;
-            z-index: 1000; /* Ensure it is above other content */
-            font-size: 24px;
+            margin-top: 3.5%;
+            padding: 0;
+            font-size: 25px;
+        }
+        u {
+            color: darkgreen;
         }
 
         table {
@@ -87,7 +95,7 @@
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: orange;
         }
 
         tr:nth-child(even) {
@@ -207,7 +215,11 @@
 
 </head>
 <body>
-    <h1>All Resign Requests</h1>
+
+<!-- Include Header -->
+<th:block th:replace="fragments/header"></th:block>
+<main>
+    <U><h2>ALL RESIGN REQUESTS</h2></U>
 <table border="1">
     <thead>
     <tr>
@@ -310,6 +322,11 @@
         alert("Resign REJECTED Successfully!");
     }
 </script>-->
+
+</main>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
 
 </body>
 </html>

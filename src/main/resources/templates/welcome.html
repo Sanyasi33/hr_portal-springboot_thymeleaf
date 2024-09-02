@@ -6,16 +6,39 @@
 
     <style>
 
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
         body {
             background-color: lightseagreen;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        }
+
+        h2 {
+            color: green;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        u {
+            color: darkgreen;
+        }
+
+        /* Wrapper to push footer to the bottom */
+        .wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
-            width: 40%;
-            margin: 100px auto;
+            width: 50%;
+            margin: auto;
             padding: 20px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -23,24 +46,14 @@
             text-align: center;
         }
 
-        h1 {
-            color: lightseagreen;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
         .button-group {
             display: flex;
-            justify-content: space-between; /* Distribute space evenly between buttons */
-            gap: 10px; /* Optional: add space between buttons */
+            justify-content: space-between;
+            gap: 10px;
         }
 
         .button-group button {
-            flex: 1; /* Allow buttons to grow and take up available space */
+            flex: 1;
             padding: 10px;
             border: none;
             border-radius: 5px;
@@ -57,25 +70,6 @@
             opacity: 0.8;
         }
 
-        .links {
-            margin-top: 20px;
-        }
-
-        .links a {
-            display: inline-block;
-            margin: 10px 0;
-            padding: 10px 20px;
-            color: white;
-            background-color: #4CAF50;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .links a:hover {
-            background-color: #45a049;
-        }
-
         .btn {
             display: inline-block;
             padding: 15px 25px;
@@ -84,41 +78,49 @@
             background-color: #4CAF50;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-            text-align: center; /* Center align text */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-align: center;
         }
 
         .btn:hover {
             background-color: #45a049;
-            transform: translateY(-2px); /* Slight lift effect on hover */
+            transform: translateY(-2px);
         }
 
         .btn:active {
-            transform: translateY(1px); /* Slight press effect on click */
+            transform: translateY(1px);
         }
-
     </style>
 
 </head>
 <body>
-<div class="container">
-    <h1>Welcome to HR Portal</h1>
+<!-- Wrapper to contain the content and push the footer down -->
+<div class="wrapper">
+    <!-- Include Header -->
+    <th:block th:replace="fragments/header"></th:block>
 
-    <!-- Form for HR Dashboard -->
-    <form th:action="@{/hrWelcome}" method="get">
-        <div class="button-group">
-            <button type="submit" class="btn">HR Dashboard</button>
-        </div>
-    </form>
-    <br><br>
+    <div class="container">
+        <u><h2>Welcome to HR Portal</h2></u>
 
-    <!-- Form for Employee Dashboard -->
-    <form th:action="@{/empWelcome}" method="get">
-        <div class="button-group">
-            <button type="submit" class="btn">Emp Dashboard</button>
-        </div>
-    </form>
+        <!-- Form for HR Dashboard -->
+        <form th:action="@{/hrWelcome}" method="get">
+            <div class="button-group">
+                <button type="submit" class="btn">HR Dashboard</button>
+            </div>
+        </form>
+        <br><br>
+
+        <!-- Form for Employee Dashboard -->
+        <form th:action="@{/empWelcome}" method="get">
+            <div class="button-group">
+                <button type="submit" class="btn">Emp Dashboard</button>
+            </div>
+        </form>
+    </div>
 </div>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
 
 </body>
 </html>

@@ -53,13 +53,19 @@
             padding: 0;
         }
 
-        h1 {
-            color: #333;
+        h2 {
+            color: green;
+            font-weight:bold;
+        }
+
+        u {
+            color: darkgreen;
         }
 
         form {
             max-width: 600px;
             margin: 20px auto;
+            margin-top:9%;
             padding: 10px;
             background: #fff;
             border-radius: 8px;
@@ -102,7 +108,8 @@
 
         .custom-border {
             border: 2px solid #eee;
-            padding: 20px;
+            padding: 30px;
+            padding-top:10px;
         }
 
         .alert {
@@ -193,13 +200,15 @@
             color: white;
         }
 
-
-
     </style>
 </head>
 <body>
-<h1 align="center">Employee Registration Form</h1>
+
+<!-- Include Header -->
+<th:block th:replace="fragments/header"></th:block>
+
 <form th:action="@{/addEmployee}" method="post" class="custom-border">
+    <u><h2 align="center">EMPLOYEE REGISTRATION FORM</h2></u>
     <div class="form-container">
         <div class="form-group">
             <label for="name">Employee Name:</label>
@@ -376,5 +385,9 @@
         });
 
 </script>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
+
 </body>
 </html>

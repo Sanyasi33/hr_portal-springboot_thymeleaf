@@ -48,26 +48,44 @@
         }
 
 
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
         body {
             background-color: lightseagreen;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        }
+
+        h2 {
+            color: green;
+            margin-bottom: 30px;
+            font-size: 27px;
+        }
+
+        u {
+            color: darkgreen;
+        }
+
+        /* Wrapper to push footer to the bottom */
+        .wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
-            width: 40%;
-            margin: 100px auto;
+            width: 50%;
+            margin: auto;
             padding: 20px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             text-align: center;
-        }
-
-        h1 {
-            color: lightseagreen;
-            margin-bottom: 30px;
         }
 
         .form-group {
@@ -161,22 +179,30 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Please Enter Emp I'd and Password which was sent you through Email</h1>
-    <form th:action="@{/tempLogin}" method="post">
-        <div class="form-group">
-            <label for="empId">Emp Id</label>
-            <input type="text" id="empId" name="empId" required>
-        </div>
-        <div class="form-group">
-            <label for="pwd">Password</label>
-            <input type="password" id="pwd" name="pwd" required>
-        </div>
-        <div class="button-group">
-            <button type="reset" class="btn">Clear</button>
-            <button type="submit" class="btn">Login</button>
-        </div>
-    </form>
+
+<!-- Wrapper to contain the content and push the footer down -->
+<div class="wrapper">
+
+    <!-- Include Header -->
+    <th:block th:replace="fragments/header"></th:block>
+
+    <div class="container">
+        <u><h2>Enter EmpId & Password which was sent through Email</h2></u>
+        <form th:action="@{/tempLogin}" method="post">
+            <div class="form-group">
+                <label for="empId">Emp Id</label>
+                <input type="text" id="empId" name="empId" required>
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password</label>
+                <input type="password" id="pwd" name="pwd" required>
+            </div>
+            <div class="button-group">
+                <button type="reset" class="btn">Clear</button>
+                <button type="submit" class="btn">Login</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <!-- Modal for displaying messages -->
@@ -224,5 +250,9 @@
         }
     });
 </script>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
+
 </body>
 </html>

@@ -4,34 +4,43 @@
     <title>leave status</title>
     <style>
 
-        body {
-            background-color: lightseagreen;
-            font-family: Arial, sans-serif;
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
-            padding-top: 60px; /* To prevent content from being hidden under fixed header */
+            display: flex;
+            flex-direction: column;
         }
 
-        h1 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        body {
+            font-family: Arial, sans-serif;
             background-color: lightseagreen;
-            color: #333;
+        }
+
+        main {
+            flex-grow: 1; /* This allows the main content to grow and push the footer down */
+        }
+
+        h2 {
+            color: green;
+            font-weight:bold;
             text-align: center;
             margin: 0;
-            padding: 15px 0;
-            z-index: 1000; /* Ensure it is above other content */
-            font-size: 24px;
+            margin-top: 3.5%;
+            padding: 0;
+            font-size: 30px;
+        }
+        u {
+            color: darkgreen;
         }
 
         table {
-            width: 80%;
+            width: 95%;
             margin: 20px auto;
             border-collapse: collapse;
             background: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         th, td {
@@ -41,7 +50,7 @@
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: orange;
         }
 
         tr:nth-child(even) {
@@ -150,8 +159,12 @@
     </style>
 </head>
 <body>
-<h1>View your leave requests status</h1>
 
+<!-- Include Header -->
+<th:block th:replace="fragments/header"></th:block>
+
+<main>
+<u><h2>Leave Requests Status</h2></u>
 <table border="1">
     <thead>
     <tr>
@@ -190,7 +203,11 @@
     <a th:href="@{/empHome(empId=${empId})}" class="button-link">Back to Home Page</a>
 </div>
 
-<br><br>
+<br><br><br><br>
+</main>
+
+<!-- Include Footer -->
+<th:block th:replace="fragments/footer"></th:block>
 
 </body>
 </html>
