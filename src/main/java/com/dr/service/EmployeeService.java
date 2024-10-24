@@ -7,6 +7,7 @@ import jakarta.mail.MessagingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,9 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class EmployeeService {
+
+    @Value("${tempLogin.link}")
+    private String link;
 
     @Autowired
     private EmployeeRepository empRepo;
@@ -34,7 +38,7 @@ public class EmployeeService {
         try {
             mailService.sendEmpRegistrationMailWithHtmlLink(employee.getEmail(), "New Employee Registration",
                     "Congratulations "+employee.getName()+" Your emp id is: " + employee.getEmpId()+
-                            " & Password is: "+employee.getPassword(), "http://localhost:8888/tempLogin");
+                            " & Password is: "+employee.getPassword(), link);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
